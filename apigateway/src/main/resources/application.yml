@@ -1,0 +1,26 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: USER-SERVICE
+          uri:
+            lb://USER-SERVICE
+          predicates:
+            - Path=/users/**
+
+        - id: gloquora-post-app
+          uri:
+            lb://gloquora-post-app
+          predicates:
+            - Path=/posts/**
+        - id: admin-app
+          uri:
+            lb://admin-app
+          predicates:
+            - Path=/admin/**
+
